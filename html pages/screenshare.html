@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<head>
+    <title> Get Good.gg </title> <!-- Website title --> 
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../CSS/screenshare.css">
+    <script src="../javascript/screenshare.js"></script>
+
+    
+
+<header>
+    <div class="container">
+      <img src="../images/getgoodlogo.png" alt ="logo" class="logo">
+
+
+      <nav>
+        <ul>
+          <li><a href="../html pages/coaches.html">COACHES</a></li>
+          <li><a href="../html pages/booking.html">BOOK NOW</a></li>
+          <li><a href="../html pages/screenshare.html">ScreenSharing</a></li>
+          <li><a href="../html pages/index.html">LOGOUT</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+
+    </head>
+
+<body>
+
+
+    <style>
+
+        #video {
+            border: 1px solid #999;
+            width: 98%;
+            max-width: 1500px;
+
+        }
+        
+        </style>
+        
+        <button id="start">Start Capture</button>
+        
+        <button id="stop">Stop Capture</button>
+        
+        <video id="video" autoplay></video>
+        
+        <script>
+            const videoElement = document.getElementById("video")
+            const start = document.getElementById("start")
+            const stop = document.getElementById("stop")
+        
+            var displayMediaOptions = {
+                video:{
+                    cursor:'always'
+                },
+                Audio:false
+            }
+        
+        
+            start.addEventListener("click",function(e){
+                startCapture()
+            },false)
+        
+        
+            stop.addEventListener("click",function(e){
+                stopCapture()
+            },false)
+        
+            async function startCapture(){
+        
+                try{
+                    videoElement.srcObject = await navigator.mediaDevices.getDisplayMedia(displayMediaOptions);
+                }catch(err){
+                    console.error("Error" + err)
+                }
+            }
+        
+            function stopCapture(e){
+                let tracks = videoElement.srcObject.getTracks()
+        
+                tracks.forEach(track => track.stop())
+        
+                videoElement.srcObject = null
+            }
+        
+        </script>
+
+    
+</body>
+
+
+</html>
